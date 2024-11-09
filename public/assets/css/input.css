@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.quantity {
+  @apply w-[80px] border border-gray-400 pl-2 rounded-sm ml-[350px];
+}
+
+.quantity_xuat {
+  @apply w-[80px] border border-gray-400 pl-2 rounded-sm ml-[410px];
+}
+
+.supplier {
+  @apply w-[390px] ml-1 pt-1 focus-visible:outline-none;
+}

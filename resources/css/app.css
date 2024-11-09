@@ -1,0 +1,32 @@
+/*@tailwind base;*/
+/*@tailwind components;*/
+/*@tailwind utilities;*/
+/*jshint esversion: 6 */
+/*
+    Create by: trinhdev
+    Update at: 2022/08/04
+    Contact: trinhhuynhdp@gmail.com
+*/
+@import '../../public/themes/plugins/fontawesome-free/css/all.min.css';
+@import '../../public/themes/plugins/bootstrap/css/bootstrap.min.css';
+@import '../../public/themes/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css';
+@import '../../public/themes/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
+@import '../../public/themes/dist/css/adminlte.min.css';
+@import '../../public/themes/plugins/overlayScrollbars/css/OverlayScrollbars.min.css';
+@import '../../public/themes/plugins/daterangepicker/daterangepicker.css';
+@import '../../public/themes/plugins/select2/css/select2.min.css';
+@import '../../public/themes/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css';
+@import '../../public/themes/plugins/summernote/summernote-bs4.min.css';
+@import '../../public/themes/plugins/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css';
+@import '../../public/themes/plugins/dragula-master/dist/dragula.min.css';
+@import '../../public/themes/plugins/simple-line-icons/style.min.css';
+@import '../../public/themes/plugins/lightslider-master/dist/css/lightslider.min.css';
+@import '../../public/themes/plugins/bootstrap-datetimepicker/css/tempus-dominus.min.css';
+@import '../../public/themes/plugins/datatables-searchpanes/css/searchPanes.bootstrap4.min.css';
+@import '../../public/themes/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
+@import '../../public/themes/plugins/toastr/toastr.min.css';
+@import '../../public/base/css/themes/default.css';
+@import '../../public/base/libraries/pace/pace-theme-minimal.css';
+@import '../../public/custom_css/style.css';
+@import '../../public/custom_css/close_request.css';
+

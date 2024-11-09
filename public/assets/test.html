@@ -1,0 +1,181 @@
+@extends('layoutv2.layout.app')
+
+@section('content')
+<div id="wrapper" style="min-height: 1405px;">
+    <div class="content">
+        <div class="row">
+            <form action="{{ route('products.update', [$products->id]) }}" class="staff-form dirty" autocomplete="off"
+                  enctype="multipart/form-data" method="post" accept-charset="utf-8" novalidate="novalidate">
+                @csrf
+                @method('PUT')
+                <input type="text" name="role_id" class="hide" value="{{ $products->role_id }}">
+                <div class="col-md-8 col-md-offset-2" id="small-table">
+                    <div class="panel_s">
+                        <div class="panel-body">
+                            <!-- Previous form fields remain unchanged -->
+
+                            <div class="form-group" id="path_1">
+                                <label class="control-label"><small class="req text-danger">* </small>Ảnh</label>
+                                <button type="button" id="select_images" class="btn btn-primary">Chọn ảnh</button>
+                                <div id="selected_images" class="mt-3"></div>
+                                <input type="hidden" name="image_ids" id="image_ids">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="btn-bottom-toolbar text-right">
+                        <button type="submit" class="btn btn-primary">Lưu lại</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Image Selection Modal -->
+    <div id="imageModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chọn ảnh</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div id="image_library" class="row"></div>
+                        </div>
+                        <div class="col-md-3">
+                            <div id="upload_section">
+                                <h4>Tải lên ảnh mới</h4>
+                                <input type="file" id="image_upload" accept="image/*" multiple>
+                                <button id="upload_button" class="btn btn-success mt-2">Tải lên</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="select_button">Chọn</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #image_library img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin: 5px;
+        cursor: pointer;
+    }
+    #image_library .selected {
+        border: 3px solid #007bff;
+    }
+    #selected_images img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin: 5px;
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const selectImagesBtn = document.getElementById('select_images');
+    const imageModal = document.getElementById('imageModal');
+    const imageLibrary = document.getElementById('image_library');
+    const selectedImagesContainer = document.getElementById('selected_images');
+    const imageIdsInput = document.getElementById('image_ids');
+    const selectButton = document.getElementById('select_button');
+    const uploadButton = document.getElementById('upload_button');
+    const imageUploadInput = document.getElementById('image_upload');
+
+    let selectedImages = [];
+
+    // Load existing product images
+    @foreach($products->images as $image)
+        addSelectedImage('{{ $image->id }}', '{{ asset($image->image_path) }}');
+    @endforeach
+
+    selectImagesBtn.addEventListener('click', function() {
+        $(imageModal).modal('show');
+        loadImages();
+    });
+
+    function loadImages() {
+        // In a real application, you would load images from the server
+        // For this example, we'll use the existing product images
+        imageLibrary.innerHTML = '';
+        @foreach($products->images as $image)
+            const img = createImageElement('{{ $image->id }}', '{{ asset($image->image_path) }}');
+            imageLibrary.appendChild(img);
+        @endforeach
+    }
+
+    function createImageElement(id, src) {
+        const img = document.createElement('img');
+        img.src = src;
+        img.dataset.id = id;
+        img.addEventListener('click', function() {
+            this.classList.toggle('selected');
+        });
+        return img;
+    }
+
+    selectButton.addEventListener('click', function() {
+        const selectedImgs = imageLibrary.querySelectorAll('.selected');
+        selectedImgs.forEach(img => {
+            addSelectedImage(img.dataset.id, img.src);
+        });
+        updateSelectedImagesInput();
+        $(imageModal).modal('hide');
+    });
+
+    function addSelectedImage(id, src) {
+        if (!selectedImages.includes(id)) {
+            selectedImages.push(id);
+            const img = document.createElement('img');
+            img.src = src;
+            img.dataset.id = id;
+            selectedImagesContainer.appendChild(img);
+        }
+    }
+
+    function updateSelectedImagesInput() {
+        imageIdsInput.value = selectedImages.join(',');
+    }
+
+    uploadButton.addEventListener('click', function() {
+        const files = imageUploadInput.files;
+        if (files.length > 0) {
+            const formData = new FormData();
+            for (let i = 0; i < files.length; i++) {
+                formData.append('images[]', files[i]);
+            }
+
+            // Send images to server
+            fetch('{{ route("upload.images") }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Add newly uploaded images to the library
+                data.images.forEach(image => {
+                    const img = createImageElement(image.id, image.path);
+                    imageLibrary.appendChild(img);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    });
+});
+</script>
+@endsection

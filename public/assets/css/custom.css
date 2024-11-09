@@ -1,0 +1,56 @@
+.daterangepicker {
+    z-index: 11000 !important;
+}
+#alert_float_1.alert-error {
+    z-index: 99999 !important;
+}
+
+ /*URL CSS: /setting?group=cronjob*/
+.editor .description {
+    display: flex;
+    flex-direction: row;
+    min-height: 1em;
+    margin-top: 1.5rem;
+    font-size: calc(14px + 2vh);
+    line-height: 1.2em
+}
+.editor .description .text {
+    width: 100%;
+    text-align: center
+}
+.editor div.schedule input {
+    flex-grow: 2;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    background-color: #141a20;
+    font-family: monospace;
+    font-size: calc(14px + 2vh);
+    line-height: 1.5;
+    text-align: center;
+    overflow-x: hidden
+}
+
+.editor div.schedule input:focus {
+    border-color: #cfe0fc;
+    outline: 0;
+    box-shadow: rgba(86,146,246,.25) 0 0 0 .2rem
+}
+
+.editor div.breakdown {
+    display: grid;
+    grid-column-gap: 12px;
+    grid-auto-columns: 20fr;
+    margin: .5rem 0;
+    text-align: center
+}
+
+.editor div.breakdown .heading {
+    grid-row: 1;
+    font-size: .75rem
+}
+
+.editor div.breakdown .text {
+    grid-row: 2
+}
+/*URL CSS: /setting?group=cronjob*/

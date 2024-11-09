@@ -1,0 +1,141 @@
+.content-wrapper>.content {
+    padding: 1px 0.5rem;
+    font-size: 11pt;
+}
+[class*=sidebar-dark-] .sidebar a {
+    color: white;
+}
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link {
+    color: white;
+    padding-left: 40px;
+}
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
+    background-color: white;
+    color: black;
+    font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: black;
+}
+
+.bootstrap-select .dropdown-toggle.bs-placeholder {
+    border: solid #CED4DA 1px;
+}
+#showList .card-header .title {
+    font-size: 17px;
+    color: #000;
+}
+#showList .card-header .accicon {
+  float: right;
+  font-size: 20px;
+  width: 1.2em;
+}
+#showList .card-header{
+  cursor: pointer;
+  border-bottom: none;
+}
+#showList .card{
+  border: 1px solid #ddd;
+}
+#showList .card-body{
+  border-top: 1px solid #ddd;
+}
+#showList .card-header:not(.collapsed) .rotate-icon {
+  transform: rotate(180deg);
+}
+/**/
+/* #sendStaff .card-header:not(.collapsed) {
+  background: red;
+}
+#sendStaff .card-header .accicon {
+  float: right;
+  font-size: 20px;
+  width: 1.2em;
+} */
+#sendStaff .card-header .btn-header-link {
+  display: block;
+  text-align: left;
+}
+
+#sendStaff .card-header .btn-header-link:after {
+  content: "\f107";
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  float: right;
+}
+
+#sendStaff .card-header .btn-header-link.collapsed:after {
+  content: "\f106";
+}
+
+#completeCheckList .card-header .btn-header-link {
+  display: block;
+  text-align: left;
+}
+
+#completeCheckList .card-header .btn-header-link:after {
+  content: "\f107";
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  float: right;
+}
+
+#completeCheckList .card-header .btn-header-link.collapsed:after {
+  content: "\f106";
+}
+
+/**/
+.icheck-carrot>input:first-child:not(:checked):not(:disabled):hover+input[type=hidden]+label::before, .icheck-carrot>input:first-child:not(:checked):not(:disabled):hover+label::before {
+  border-color: #007bff;
+}
+.icheck-carrot>input:first-child:checked+input[type=hidden]+label::before, .icheck-carrot>input:first-child:checked+label::before {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+.warning-alert{
+  color: red;
+}
+.box-target{
+  padding:10px;
+}
+.required_red_dot::after{
+    content:" (*)";
+    color: red;
+}
+
+.uppercase{
+  text-transform: uppercase;
+}
+
+/* (A) FULL SCREEN WRAPPER */
+#spinner {
+  position: fixed;
+  top: 0; left: 0; z-index: 9999;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 0.2s;
+}
+
+/* (B) CENTER LOADING SPINNER */
+#spinner .loader {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%);
+}
+
+/* (C) SHOW & HIDE */
+#spinner {
+  visibility: hidden;
+  opacity: 0;
+}
+#spinner.show {
+  visibility: visible;
+  opacity: 1;
+}
+.btn-light{
+  border-color: #2e2a2a73;
+}
+
+.daterangepicker .ranges {
+    width: auto;
+}
