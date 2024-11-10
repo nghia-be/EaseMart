@@ -38,12 +38,7 @@ class ProductsDataTable extends BuilderDatatables
                     return 'No image';
                 }
             })
-            ->editColumn('price', function ($row) {
-                return number_format($row->price, 0, ',', '.') . 'đ';
-            })
-            ->editColumn('price_sale', function ($row) {
-                return number_format($row->price_sale, 0, ',', '.') . 'đ';
-            })
+
             ->editColumn('checkbox', function ($row) {
                 return '<div class="checkbox"><input type="checkbox" value="' . $row->event_id . '"><label></label></div>';
             })
@@ -73,7 +68,7 @@ class ProductsDataTable extends BuilderDatatables
                     ';
             })
             
-            ->rawColumns(['name','checkbox','brand_id','price','image','price_sale','categories_id','status','action']);
+            ->rawColumns(['name','checkbox','brand_id','image','categories_id','status','action']);
     }
 
     public function query(products $model)
@@ -93,12 +88,6 @@ class ProductsDataTable extends BuilderDatatables
             ],
             'image' => [
                 'title' => 'Hình ảnh',
-            ],
-            'price' => [
-                'title' => 'Giá',
-            ],
-            'price_sale' => [
-                'title' => 'Giá Giảm',
             ],
             'status' => [
                 'title' => 'Trạng thái',

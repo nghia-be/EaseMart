@@ -40,6 +40,7 @@ class StockTransactionController extends BaseController
 
     public function storeImport(Request $request)
 {
+    
     $request->validate([
         'warehouse_code' => 'required',
         'supplier_code' => 'required',
@@ -110,7 +111,7 @@ class StockTransactionController extends BaseController
             'product_transaction_id' => $stockTransaction->id, // Giả định $stockTransaction đã được định nghĩa trước đó
             'product_id' => $product['id'],
             'unit_code' => $currentUnit->unit_code,
-            'quantity' => $request->quantity,
+            'quantity' => $product['quantity'],
         ]);
         // Cập nhật hoặc tạo mới bản ghi trong bảng Stock với `product_unit_id` của cấp thấp nhất
         Stock::updateOrCreate(

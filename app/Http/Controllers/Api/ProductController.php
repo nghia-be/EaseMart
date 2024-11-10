@@ -21,9 +21,9 @@ class ProductController extends Controller
 
     public function getProductDetail($id)
 {
-    // Tìm sản phẩm với các quan hệ images và productUnits
+    // Tìm sản phẩm với các quan hệ images, productUnits và comments
     try {
-        $product = Products::with(['images', 'productUnits', 'categories'])->find($id);
+        $product = Products::with(['images', 'productUnits', 'categories', 'comments'])->find($id);
     
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
@@ -36,17 +36,17 @@ class ProductController extends Controller
         $relatedProducts = Products::where('categories_id', $product->categories_id)
             ->where('id', '!=', $product->id) // Để loại bỏ sản phẩm hiện tại
             ->inRandomOrder() // Sắp xếp ngẫu nhiên
-            ->limit(2) // Lấy 4 sản phẩm liên quan
+            ->limit(2) // Lấy 2 sản phẩm liên quan
             ->get();
         
-        // Trả về dữ liệu sản phẩm, hình ảnh và đơn vị
+        // Trả về dữ liệu sản phẩm, hình ảnh, đơn vị, và comment
         return response()->json([
             'product' => $product->only(['id', 'name', 'description', 'categories_id', 'brand_id', 'slug', 'status', 'views', 'created_at', 'updated_at']),
             'images' => $product->images->map(function($image) {
                 return [
                     'image_path' => $image->image_path,
                     'alt_text' => $image->alt_text,
-                    'is_primakey' => $image->is_primakey
+                    'is_primary' => $image->is_primary
                 ];
             }),
             'product_units' => $product->productUnits->map(function($unit) {
@@ -56,7 +56,13 @@ class ProductController extends Controller
                     'price_sale' => $unit->price_sale
                 ];
             }),
-            
+            'comments' => $product->comments->map(function($comment) {
+                return [
+                    'customer' => $comment->customer->name, // Giả sử bạn có mối quan hệ với User để lấy tên người bình luận
+                    'content' => $comment->content,
+                    'created_at' => $comment->created_at
+                ];
+            }),
             'related_products' => $relatedProducts->map(function($relatedProduct) {
                 // Lấy thông tin về đơn vị sản phẩm (productUnits) của sản phẩm liên quan
                 $relatedProductUnit = $relatedProduct->productUnits->first(); // Lấy sản phẩm đơn vị đầu tiên
@@ -83,6 +89,7 @@ class ProductController extends Controller
         ], 500);
     }
 }
+
 
 
     

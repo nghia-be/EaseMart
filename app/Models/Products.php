@@ -98,5 +98,9 @@ public function primaryImage()
     {
         return $date->format('H:i:s d-m-Y');
     }
+    public function comments()
+{
+    return $this->hasMany(Comment::class,'product_id');
+}
 
 }
