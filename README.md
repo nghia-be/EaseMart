@@ -9,8 +9,7 @@
 
 ### Maintain Dev
 
-- [TrinhHDP](https://fpt.workplace.com/profile.php?id=100076727237575).
-- [OanhLTN3](https://fpt.workplace.com/profile.php?id=100074294720393).
+- [NghiaTD](https://fpt.workplace.com/profile.php?id=61565061120661).
 
 ### Set Up Project
 
