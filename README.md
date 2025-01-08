@@ -23,7 +23,7 @@ Docker config, cd to folder project
 - docker-compose up -d
 - php artisan migrate
 - php artisan key:generate
-- Edit .env file: DB_PASSWORD=trinhdev
+- Edit .env file: DB_PASSWORD=123123123
 - php artisan serve
 
 To use VITE JS hot reload blade
